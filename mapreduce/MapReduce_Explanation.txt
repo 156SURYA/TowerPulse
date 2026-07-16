@@ -1,0 +1,17 @@
+MapReduce Job: Tower Call Count
+
+Input:
+CDR CSV files stored in HDFS (/user/telecom/raw/batch)
+
+Mapper:
+- Reads each CDR record
+- Emits (tower_id, 1)
+
+Reducer:
+- Aggregates total calls per tower
+
+Output:
+HDFS path: /user/telecom/processed/mr_output
+
+Use Case:
+Historical batch processing for telecom analytics.
