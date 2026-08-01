@@ -31,7 +31,6 @@ object TowerPulse {
         .option("kafka.bootstrap.servers", "localhost:9092")
         .option("subscribe", "telecom_cdr")
         .option("startingOffsets", "earliest")
-        .option("failOnDataLoss", "false")
         .load()
         .selectExpr("CAST(value AS STRING) AS json")
         .select(from_json(col("json"), cdrSchema).alias("data"))
@@ -63,7 +62,7 @@ object TowerPulse {
       .outputMode("append")
       .format("parquet")
       .option("path", "/user/telecom/hive/tower_congestion_rt")
-      .option("checkpointLocation", "file:///tmp/telecom_hive_ckpt_final")
+      .option("checkpointLocation", "/user/telecom/stream/checkpoints/tower_congestion_rt")
       .start()
 
     val alertDF = towerCongestionStream
