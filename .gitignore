@@ -1,0 +1,4 @@
+metastore_db/
+*.bak
+derby.log
+spark-warehouse/
